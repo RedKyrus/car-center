@@ -1,13 +1,23 @@
 import Head from "next/head";
 import Image from "next/image";
-import MainMenu from "../components/main-menu";
+import Layout from "../components/layouts/layout";
+
 // import styles from "../styles/Home.module.css";
 
 export default function Home() {
   return (
-    <div>
-      <MainMenu currentMenu="홈" />
-      <p className=""></p>
-    </div>
+    <>
+      <Layout mainMenu="홈" subMenu="">
+        <div className="bg-stone-400">
+          <div className="h-96">1</div>
+          <div className="h-96">1</div>
+          <div className="h-96">1</div>
+          <div className="h-96">1</div>
+          <div>
+            <p>콘텐츠</p>
+          </div>
+        </div>
+      </Layout>
+    </>
   );
 }

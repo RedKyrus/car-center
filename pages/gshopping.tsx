@@ -6,7 +6,7 @@ import MainMenu from "../components/layouts/main-menu";
 
 export default function Consult() {
   return (
-    <Layout mainMenu="상담 관리">
+    <Layout mainMenu="지쇼 관리">
       <div className="bg-orange-200">
         <div className="h-96">1</div>
         <div className="h-96">1</div>
