@@ -9,9 +9,9 @@ interface MenuButtonProp {
   children?: React.ReactNode;
 }
 
-interface SubMenuButtonProp extends MenuButtonProp {
-  key: number;
-}
+// interface SubMenuButtonProp extends MenuButtonProp {
+//   key: number;
+// }
 
 export function MenuButton({
   name,
@@ -36,16 +36,20 @@ export function MenuButton({
   );
 }
 
-export function SubMenuButton({ key, name, href }: SubMenuButtonProp) {
+export function SubMenuButton({ name, href, currentMenu }: MenuButtonProp) {
   return (
     <Link
       onClick={(e) => {}}
-      key={key}
       href={href}
-      className="block py-2 w-full"
+      className={cls(
+        "block pt-3.5 w-full text-white hover:text-teal-200",
+        name == currentMenu
+          ? "bg-gradient-to-r from-slate-700 via-gray-900 to-slate-700"
+          : ""
+      )}
     >
-      {name ? <p className="text-white text-center text-base">{name}</p> : null}
-      <div className="w-11/12 h-0.5 mx-auto mt-2 bg-gradient-to-r from-slate-700 via-slate-500 to-slate-700"></div>
+      {name ? <p className="text-center text-base">{name}</p> : null}
+      <div className="w-11/12 h-0.5 mx-auto mt-3 bg-gradient-to-r from-slate-700 via-slate-500 to-slate-700"></div>
     </Link>
   );
 }

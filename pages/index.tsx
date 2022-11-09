@@ -7,8 +7,8 @@ import Layout from "../components/layouts/layout";
 export default function Home() {
   return (
     <>
-      <Layout mainMenu="홈" subMenu="">
-        <div className="bg-stone-400">
+      <Layout mainMenu="홈">
+        <div className="bg-stone-400h">
           <div className="h-96">1</div>
           <div className="h-96">1</div>
           <div className="h-96">1</div>

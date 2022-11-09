@@ -1,0 +1,7 @@
+{
+  "cSpell.words": ["gshopping"],
+  // "css.customData": [".vscode/css_custom_data.json"],
+  "files.associations": {
+    "*.scss": "tailwindcss"
+  }
+}

@@ -5,40 +5,36 @@ import { MenuButton, MenuTitleButton, SubMenuButton } from "./main-menu-button";
 let menuList = [
   {
     name: "상담 관리",
-    href: "/consult",
-    subList: [
-      { subName: "신청관리", subHref: "/consult" },
-      { subName: "신청관리", subHref: "/consult" },
-      { subName: "신청관리", subHref: "/consult" },
-    ],
+    subList: [{ subName: "신청관리", subHref: "/consult" }],
   },
   {
     name: "사이트 관리",
-    href: "/consult",
     subList: [
-      { subName: "상담관리 테스트", subHref: "/" },
-      { subName: "상담관리 테스트2", subHref: "/" },
-      { subName: "상담관리 테스트3", subHref: "/" },
+      { subName: "전체", subHref: "/gshopping" },
+      { subName: "카이지", subHref: "/gshopping" },
+      { subName: "삼성카드", subHref: "/gshopping" },
+      { subName: "벤카", subHref: "/gshopping" },
     ],
   },
   {
     name: "지쇼 관리",
-    href: "/gshopping",
     subList: [
-      { subName: "상담관리 테스트", subHref: "/" },
-      { subName: "상담관리 테스트2", subHref: "/" },
-      { subName: "상담관리 테스트3", subHref: "/" },
+      { subName: "전체", subHref: "/gshopping" },
+      { subName: "카이지", subHref: "/gshopping" },
+      { subName: "삼성카드", subHref: "/gshopping" },
+      { subName: "벤카", subHref: "/gshopping" },
     ],
   },
 ];
 
 interface MainMenuProps {
   mainMenu: string;
+  subMenu?: string;
 }
 
 let cc = () => {};
 
-export default function MainMenu({ mainMenu }: MainMenuProps) {
+export default function MainMenu({ mainMenu, subMenu }: MainMenuProps) {
   const [menu, setMenu] = useState<string>("");
   const onChangeMenu = (e: Event) => {
     console.log(e);
@@ -47,6 +43,7 @@ export default function MainMenu({ mainMenu }: MainMenuProps) {
   const subList = menuList.find((e) => {
     if (e.name === mainMenu) return true;
   })?.subList;
+  subList;
 
   return (
     <nav className="fixed w-60 left-0 h-full">
@@ -92,7 +89,7 @@ export default function MainMenu({ mainMenu }: MainMenuProps) {
               <path d="M21.721 12.752a9.711 9.711 0 00-.945-5.003 12.754 12.754 0 01-4.339 2.708 18.991 18.991 0 01-.214 4.772 17.165 17.165 0 005.498-2.477zM14.634 15.55a17.324 17.324 0 00.332-4.647c-.952.227-1.945.347-2.966.347-1.021 0-2.014-.12-2.966-.347a17.515 17.515 0 00.332 4.647 17.385 17.385 0 005.268 0zM9.772 17.119a18.963 18.963 0 004.456 0A17.182 17.182 0 0112 21.724a17.18 17.18 0 01-2.228-4.605zM7.777 15.23a18.87 18.87 0 01-.214-4.774 12.753 12.753 0 01-4.34-2.708 9.711 9.711 0 00-.944 5.004 17.165 17.165 0 005.498 2.477zM21.356 14.752a9.765 9.765 0 01-7.478 6.817 18.64 18.64 0 001.988-4.718 18.627 18.627 0 005.49-2.098zM2.644 14.752c1.682.971 3.53 1.688 5.49 2.099a18.64 18.64 0 001.988 4.718 9.765 9.765 0 01-7.478-6.816zM13.878 2.43a9.755 9.755 0 016.116 3.986 11.267 11.267 0 01-3.746 2.504 18.63 18.63 0 00-2.37-6.49zM12 2.276a17.152 17.152 0 012.805 7.121c-.897.23-1.837.353-2.805.353-.968 0-1.908-.122-2.805-.353A17.151 17.151 0 0112 2.276zM10.122 2.43a18.629 18.629 0 00-2.37 6.49 11.266 11.266 0 01-3.746-2.504 9.754 9.754 0 016.116-3.985z" />
             </svg>
           </MenuButton>
-          <MenuButton currentMenu={mainMenu} name="지쇼 관리" href="/">
+          <MenuButton currentMenu={mainMenu} name="지쇼 관리" href="/gshopping">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               viewBox="0 0 20 20"
@@ -117,9 +114,14 @@ export default function MainMenu({ mainMenu }: MainMenuProps) {
             </svg>
           </MenuButton>
         </div>
-        <div className="h-full w-7/12 bg-slate-700 pt-4">
+        <div className="h-full w-7/12 bg-slate-700">
           {subList?.map((sub, i) => (
-            <SubMenuButton key={i} name={sub.subName} href={sub.subHref} />
+            <SubMenuButton
+              key={i}
+              name={sub.subName}
+              href={sub.subHref}
+              currentMenu={subMenu}
+            />
           ))}
         </div>
       </div>
