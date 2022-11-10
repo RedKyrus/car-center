@@ -2,60 +2,138 @@ import Head from "next/head";
 import Image from "next/image";
 import Layout from "../../components/layouts/layout";
 import MainMenu from "../../components/layouts/main-menu";
+import { cls } from "../../lib/utils";
 // import styles from "../styles/Home.module.css";
 
 const test = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9];
 
-const tableHeadList = [
-  { name: "번호", col_w: "1.0rem" },
-  { name: "쇼핑몰", col_w: "1.0rem" },
-  { name: "이름", col_w: "1.0rem" },
-  { name: "연락처", col_w: "1.0rem" },
-  { name: "차종", col_w: "1.0rem" },
-  { name: "제휴사", col_w: "1.0rem" },
-  { name: "담당자", col_w: "1.0rem" },
-  { name: "구분", col_w: "1.0rem" },
-  { name: "등록일", col_w: "1.0rem" },
-  { name: "진행도", col_w: "1.0rem" },
+// const tableHeadList = [
+//   { name: "번호", col_w: "w-[100px]" },
+//   { name: "쇼핑몰", col_w: "w-[400px]" },
+//   { name: "이름", col_w: "w-[320px]" },
+//   { name: "연락처", col_w: "w-[100px]" },
+//   { name: "차종", col_w: "w-[100px]" },
+//   { name: "제휴사", col_w: "w-[100px]" },
+//   { name: "담당자", col_w: "w-[100px]" },
+//   { name: "구분", col_w: "w-[100px]" },
+//   { name: "등록일", col_w: "w-[300px]" },
+//   { name: "진행도", col_w: "w-[100px]" },
+// ];
+
+const tableHeadListBase = [
+  { name: "번호", col_w: "100" },
+  { name: "쇼핑몰", col_w: "100" },
+  { name: "이름", col_w: "320" },
+  { name: "연락처", col_w: "100" },
+  { name: "차종", col_w: "100" },
+  { name: "제휴사", col_w: "100" },
+  { name: "담당자", col_w: "100" },
+  { name: "구분", col_w: "100" },
+  { name: "등록일", col_w: "300" },
+  { name: "진행도", col_w: "100" },
 ];
 
-export default function Consult() {
-  console.log(test.length);
-  return (
-    <Layout mainMenu="상담 관리" subMenu="신청관리">
-      <div className="bg-white w-[96%] m-auto border-2 border-stone-300 border-t-2 border-t-teal-600 drop-shadow-sm relative overflow-x-auto min-w-[720px] pt-8">
-        <ul className="flex justify-between items-center bg-neutral-200 absolute top-0 w-full border-b-2 border-neutral-300">
-          <li className="w-7 flex justify-center items-center">
-            <input type="checkbox" />
-          </li>
-          {tableHeadList.map((tableHead, i) => (
-            <li
-              className="grow border-[1px] border-l-0 last-of-type:border-r-0 h-8 flex justify-center items-center"
-              key={i}
-            >
-              <p className="text-sm">{tableHead.name}</p>
-            </li>
-          ))}
-        </ul>
+let tableTotalWidthCount = 28;
 
-        {[1, 2, 3, 4, 5, 6].map((_, i) => (
-          <ul
-            key={i}
-            className="flex justify-between odd:bg-neutral-100 first-of-type:border-t-0"
-          >
-            <li className="w-7 flex justify-center items-center border-[1px]">
+const tableHeadList = tableHeadListBase.map((tableHead, i) => {
+  tableTotalWidthCount += Number(tableHead.col_w);
+  tableHead.col_w = `w-[${tableHead.col_w}px]`;
+  return tableHead;
+});
+
+const tableTotalWidthStyle: string = `min-width:${tableTotalWidthCount.toString()}px`;
+
+export default function Consult() {
+  // console.log(test.length);
+
+  return (
+    // <Layout mainMenu="상담 관리" subMenu="신청관리">
+    //   <div className="bg-white w-[96%] m-auto  drop-shadow-sm max-w-[1920px]">
+    //     <h3 className="py-2">신청목록</h3>
+    //     <div className="pt-8 relative overflow-x-auto">
+    //       <ul className="flex bg-neutral-200 top-0 border-b-[1px] border-b-teal-600  border-stone-300 border-t-2 border-t-teal-600 absolute">
+    //         <li className="w-7 flex justify-center items-center border-r-neutral-300 border-x-[1px]">
+    //           <input type="checkbox" />
+    //         </li>
+    //         {tableHeadList.map((tableHead, i) => (
+    //           <li
+    //             key={i}
+    //             className={cls(
+    //               "border-r-neutral-300 border-r-[1px] h-8 flex justify-center items-center",
+    //               `${tableHead.col_w}`
+    //             )}
+    //           >
+    //             <p className="text-sm">{tableHead.name}</p>
+    //           </li>
+    //         ))}
+    //       </ul>
+    //       <div className="overflow-x-hidden overflow-y-auto h-[300px] w-full">
+    //         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
+    //           <ul key={i} className="flex first-of-type:border-t-0 group">
+    //             <li className="w-7 flex justify-center items-center border-neutral-300 border-[1px] border-t-0 flex-shrink-0 group-even:bg-slate-100">
+    //               <input type="checkbox" />
+    //             </li>
+    //             {test.map((_, i) => (
+    //               <li
+    //                 key={i}
+    //                 className={cls(
+    //                   "border-[1px] border-l-0 py-3 flex justify-center items-center flex-shrink-0 group-even:bg-slate-100",
+    //                   tableHeadList[i].col_w
+    //                 )}
+    //               >
+    //                 <p>테스트{i}</p>
+    //               </li>
+    //             ))}
+    //           </ul>
+    //         ))}
+    //       </div>
+    //     </div>
+    //   </div>
+    // </Layout>
+    <Layout mainMenu="상담 관리" subMenu="신청관리">
+      <div className="bg-white w-[96%] m-auto  drop-shadow-sm max-w-[1920px]">
+        <h3 className="py-2">신청목록</h3>
+        <div
+          className="relative overflow-auto h-[300px]"
+          // style={{ minWidth: `${tableTotalWidthCount}px` }}
+          // style={{ width: "1000px", height: "280px" }}
+        >
+          <ul className="flex bg-neutral-200 top-0 border-b-[1px] border-b-teal-600  border-stone-300 border-t-2 border-t-teal-600 sticky">
+            <li className="w-7 flex justify-center items-center border-r-neutral-300 border-x-[1px]">
               <input type="checkbox" />
             </li>
-            {test.map((_, i) => (
+            {tableHeadList.map((tableHead, i) => (
               <li
-                className="grow border-[1px] border-l-0 last-of-type:border-r-0 py-3"
                 key={i}
+                className={cls(
+                  "border-r-neutral-300 border-r-[1px] h-8 flex justify-center items-center",
+                  `${tableHead.col_w}`
+                )}
               >
-                <p>테스트{i}</p>
+                <p className="text-sm">{tableHead.name}</p>
               </li>
             ))}
           </ul>
-        ))}
+
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
+            <ul key={i} className="flex first-of-type:border-t-0 group">
+              <li className="w-7 flex justify-center items-center border-neutral-300 border-[1px] border-t-0 flex-shrink-0 group-even:bg-slate-100">
+                <input type="checkbox" />
+              </li>
+              {test.map((_, i) => (
+                <li
+                  key={i}
+                  className={cls(
+                    "border-[1px] border-l-0 py-3 flex justify-center items-center flex-shrink-0 group-even:bg-slate-100",
+                    tableHeadList[i].col_w
+                  )}
+                >
+                  <p>테스트{i}</p>
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
       </div>
     </Layout>
   );

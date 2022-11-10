@@ -24,7 +24,7 @@ export function MenuButton({
       onClick={(e) => {}}
       href={href}
       className={cls(
-        "block py-3 hover:from-teal-700 hover:via-teal-600 hover:to-teal-600 text-white",
+        "block py-3 hover:from-teal-800 hover:via-teal-700 hover:to-teal-700 text-white",
         name === currentMenu
           ? "bg-gradient-to-r from-slate-800 via-slate-700 to-slate-700"
           : "bg-gradient-to-b from-slate-800 via-slate-900 to-slate-900"
