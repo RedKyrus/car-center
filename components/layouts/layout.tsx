@@ -20,7 +20,7 @@ export default function Layout({ mainMenu, subMenu, children }: LayoutProps) {
         </div>
       </header>
       <MainMenu mainMenu={mainMenu} subMenu={subMenu} />
-      <div className="ml-60 pt-20 bg-neutral-300 min-h-[100vh] ">
+      <div className="ml-60 pt-20 bg-neutral-200 min-h-[100vh] ">
         {children}
       </div>
     </div>
