@@ -52,8 +52,13 @@ export default function Consult() {
     <Layout mainMenu="상담 관리" subMenu="신청관리">
       <div className=" w-[96%] ml-10  drop-shadow-sm">
         <h3 className="py-2 text-xl">신청목록</h3>
+        <div>
+          <input type="text" />
+          <span>/</span>
+          <span>45</span>
+        </div>
         <div className="flex bg-white w-fit rounded-3xl border-2 border-slate-400 px-3">
-          <button className="order-1 p-1">
+          <button className="order-1 py-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -69,7 +74,7 @@ export default function Consult() {
               />
             </svg>
           </button>
-          <button className="order-2 p-1">
+          <button className="order-2 py-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -85,7 +90,23 @@ export default function Consult() {
               />
             </svg>
           </button>
-          <div className="order-3 p-1 flex items-center">
+          <div className="order-3 py-1 flex items-center">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth={1.5}
+              stroke="currentColor"
+              className="w-4 h-5"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
+              />
+            </svg>
+          </div>
+          <div className="order-5 py-1 flex items-center">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -101,23 +122,7 @@ export default function Consult() {
               />
             </svg>
           </div>
-          <div className="order-5 p-1 flex items-center">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              strokeWidth={1.5}
-              stroke="currentColor"
-              className="w-5 h-5"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                d="M6.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM12.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0zM18.75 12a.75.75 0 11-1.5 0 .75.75 0 011.5 0z"
-              />
-            </svg>
-          </div>
-          <button className="order-6 p-1">
+          <button className="order-6 py-1">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -133,7 +138,7 @@ export default function Consult() {
               />
             </svg>
           </button>
-          <button className="order-7 p-1 ">
+          <button className="order-7 py-1 ">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -151,9 +156,11 @@ export default function Consult() {
           </button>
 
           <div className="order-4 py-1 flex items-center">
-            <button className="px-1 text-lg">1</button>
-            <button className="px-1 text-lg">2</button>
-            <button className="px-1 text-lg">3</button>
+            <button className="px-2 text-lg">1</button>
+            <button className="px-2 text-lg">2</button>
+            <button className="px-2 text-lg">3</button>
+            <button className="px-2 text-lg">4</button>
+            <button className="px-2 text-lg">5</button>
           </div>
         </div>
         <Table
