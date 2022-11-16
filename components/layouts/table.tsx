@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { cls } from "../../lib/utils";
 
 type tableList = { name: string; col_w: string };
@@ -13,11 +14,12 @@ interface TableProps {
 export default function Table<Props extends TableProps>({
   tableHeadList,
   tableContentsList,
-  tableHeight = 400,
+  tableHeight = 500,
   className = "",
   ...rest
 }: Props) {
   const tableHeightCss = "h-[" + tableHeight + "px]";
+  // const [,set] = useState();
   return (
     <div
       {...rest}
@@ -48,7 +50,7 @@ export default function Table<Props extends TableProps>({
         ))}
       </ul>
 
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
+      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map((_, i) => (
         <ul key={i} className="flex first-of-type:border-t-0 group">
           <li className="w-7 flex justify-center items-center border-neutral-300 border-[1px] border-t-0 flex-shrink-0 group-even:bg-slate-100">
             <input type="checkbox" />

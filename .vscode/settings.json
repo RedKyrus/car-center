@@ -3,5 +3,9 @@
   // "css.customData": [".vscode/css_custom_data.json"],
   "files.associations": {
     "*.scss": "tailwindcss"
+  },
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma",
+    "editor.formatOnSave": true
   }
 }
