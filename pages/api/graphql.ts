@@ -1,4 +1,5 @@
 import { gql, ApolloServer } from "apollo-server-micro";
+import { NextApiRequest, NextApiResponse, NextConfig } from "next";
 // import { PrismaClient } from "@prisma/client";
 
 const typeDefs = gql`
@@ -20,10 +21,15 @@ const resolvers = {
 
 const apolloServer = new ApolloServer({ typeDefs, resolvers });
 
-const apolloHandler = apolloServer.createHandler({ path: "/api/graphql" });
+const apolloServerStart = apolloServer.start();
+
+async function apolloHandler(res: NextApiRequest, req: NextApiResponse) {
+  await apolloServerStart;
+  apolloServer.createHandler({ path: "/api/graphql" })(res, req);
+}
 
 // const startApolloServer = apolloServer.start();
 
-export const config = { api: { bodyParser: false } };
+export const config: NextConfig = { api: { bodyParser: false } };
 
 export default apolloHandler;
