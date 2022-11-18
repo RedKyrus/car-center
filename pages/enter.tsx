@@ -1,7 +1,6 @@
 import Head from "next/head";
 import Image from "next/image";
 import { useForm } from "react-hook-form";
-import Layout from "../components/layouts/layout";
 
 // import styles from "../styles/Home.module.css";
 

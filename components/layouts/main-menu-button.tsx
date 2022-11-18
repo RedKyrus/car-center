@@ -1,6 +1,6 @@
 import Link from "next/link";
 import React from "react";
-import { cls } from "../../lib/utils";
+import { cls } from "../../libs/utils";
 
 interface MenuButtonProp {
   name?: string;

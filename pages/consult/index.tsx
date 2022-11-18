@@ -2,8 +2,8 @@ import Head from "next/head";
 import Image from "next/image";
 import Layout from "../../components/layouts/layout";
 import MainMenu from "../../components/layouts/main-menu";
-import Table from "../../components/layouts/table";
-import { cls } from "../../lib/utils";
+import Table from "@components/table";
+import { cls } from "@libs/utils";
 // import styles from "../styles/Home.module.css";
 
 const test = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9];

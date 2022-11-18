@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { cls } from "../../lib/utils";
+import { cls } from "../libs/utils";
 
 type tableList = { name: string; col_w: string };
 

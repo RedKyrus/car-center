@@ -39,12 +39,14 @@ model Consult {
   updatedAt DateTime @updatedAt
 }
 
-model Custermer {
+model CustermerInfo {
   id        Int      @id @default(autoincrement())
   name      String
   phone     String
   wantCar   String?
   visitSite String
+  reception Int
+  progress  Int
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
 }
