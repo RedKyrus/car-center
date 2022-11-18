@@ -39,7 +39,7 @@ model Consult {
   updatedAt DateTime @updatedAt
 }
 
-model CustermerInfo {
+model CustomerInfo {
   id        Int      @id @default(autoincrement())
   name      String
   phone     String

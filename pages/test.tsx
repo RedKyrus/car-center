@@ -19,7 +19,7 @@ export default function Test() {
       <Layout mainMenu="홈">
         <div className="bg-stone-400h">
           {/* <Image src={testImg} alt="테스트" /> */}
-          <Image src="/test.png" alt="테스트" width={100} height={0} />
+          {/* <Image src="/test.png" alt="테스트" width={100} height={0} /> */}
           <div className="h-96">1</div>
           <div className="h-96">1</div>
           <div className="h-96">1</div>

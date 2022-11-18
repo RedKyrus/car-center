@@ -5,8 +5,8 @@ type tableList = { name: string; col_w: string };
 
 interface TableProps {
   tableHeadList: tableList[];
-  tableContentsList: number[] | string[];
   tableHeight?: number;
+  tableContentsList: any[];
   [key: string]: any;
   className?: string;
 }
@@ -14,7 +14,7 @@ interface TableProps {
 export default function Table<Props extends TableProps>({
   tableHeadList,
   tableContentsList,
-  tableHeight = 500,
+  tableHeight = 300,
   className = "",
   ...rest
 }: Props) {
@@ -50,20 +50,20 @@ export default function Table<Props extends TableProps>({
         ))}
       </ul>
 
-      {[1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12].map((_, i) => (
+      {tableContentsList.map((data, i) => (
         <ul key={i} className="flex first-of-type:border-t-0 group">
           <li className="w-7 flex justify-center items-center border-neutral-300 border-[1px] border-t-0 flex-shrink-0 group-even:bg-slate-100">
             <input type="checkbox" />
           </li>
-          {tableContentsList.map((_, i) => (
+          {tableHeadList.map((_, j) => (
             <li
-              key={i}
+              key={j}
               className={cls(
                 "border-[1px] border-l-0 py-3 flex justify-center items-center flex-shrink-0 group-even:bg-slate-100",
-                tableHeadList[i].col_w
+                tableHeadList[j].col_w
               )}
             >
-              <p>테스트{i}</p>
+              <p>{data.name}</p>
             </li>
           ))}
         </ul>

@@ -46,7 +46,7 @@ export default function MainMenu({ mainMenu, subMenu }: MainMenuProps) {
   subList;
 
   return (
-    <nav className="fixed w-60 left-0 h-full">
+    <nav className="fixed w-60 left-0 h-full z-10">
       <div className="bg-teal-600">
         <MenuTitleButton name="HOME" href="/">
           <svg

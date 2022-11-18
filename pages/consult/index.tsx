@@ -4,7 +4,15 @@ import Layout from "../../components/layouts/layout";
 import MainMenu from "../../components/layouts/main-menu";
 import Table from "@components/table";
 import { cls } from "@libs/utils";
+import useMutation from "@libs/client/useMutation";
+import useSWR from "swr";
+import { CustomerInfo } from "@prisma/client";
 // import styles from "../styles/Home.module.css";
+
+interface CustomerInfoListResponse {
+  ok: boolean;
+  customerInfoList: CustomerInfo[];
+}
 
 const test = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9];
 
@@ -42,12 +50,9 @@ const tableHeadList = tableHeadListBase.map((tableHead, i) => {
   return tableHead;
 });
 
-const tableTotalMaxWidth: string = "max-w-[" + tableTotalWidthCount + "px]";
-const tableTotalMaxWidth2: string = `min-w-[${tableTotalWidthCount.toString()}px]`;
-const tableTotalMinWidth: string = "min-w-[" + tableTotalWidthCount + "px]";
-
 export default function Consult() {
-  // console.log(test.length);
+  const { data } = useSWR<CustomerInfoListResponse>("/api/consult");
+
   return (
     <Layout mainMenu="상담 관리" subMenu="신청관리">
       <div className=" w-[96%] ml-10  drop-shadow-sm">
@@ -79,7 +84,7 @@ export default function Consult() {
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
               viewBox="0 0 24 24"
-              stroke-width="1.5"
+              strokeWidth="1.5"
               stroke="currentColor"
               className="w-6 h-6"
             >
@@ -163,9 +168,12 @@ export default function Consult() {
             <button className="px-2 text-lg">5</button>
           </div>
         </div>
+
         <Table
           tableHeadList={tableHeadList}
-          tableContentsList={test}
+          tableContentsList={
+            data?.customerInfoList ? data?.customerInfoList : []
+          }
           className="mt-4"
         ></Table>
         {/* <div
