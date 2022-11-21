@@ -1,12 +1,14 @@
 import Head from "next/head";
 import Image from "next/image";
-import Layout from "../../components/layouts/layout";
-import MainMenu from "../../components/layouts/main-menu";
-import Table from "@components/table";
+import Layout from "@components/layouts/layout";
+import Table, { TCol, TRow } from "@components/table";
 import { cls } from "@libs/utils";
 import useMutation from "@libs/client/useMutation";
 import useSWR from "swr";
 import { CustomerInfo } from "@prisma/client";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+
 // import styles from "../styles/Home.module.css";
 
 interface CustomerInfoListResponse {
@@ -14,44 +16,66 @@ interface CustomerInfoListResponse {
   customerInfoList: CustomerInfo[];
 }
 
-const test = [1, 2, 3, 4, 5, 6, 7, 7, 8, 9];
-
-// const tableHeadList = [
-//   { name: "번호", col_w: "w-[100px]" },
-//   { name: "쇼핑몰", col_w: "w-[400px]" },
-//   { name: "이름", col_w: "w-[320px]" },
-//   { name: "연락처", col_w: "w-[100px]" },
-//   { name: "차종", col_w: "w-[100px]" },
-//   { name: "제휴사", col_w: "w-[100px]" },
-//   { name: "담당자", col_w: "w-[100px]" },
-//   { name: "구분", col_w: "w-[100px]" },
-//   { name: "등록일", col_w: "w-[300px]" },
-//   { name: "진행도", col_w: "w-[100px]" },
-// ];
-
 const tableHeadListBase = [
-  { name: "번호", col_w: "100" },
-  { name: "쇼핑몰", col_w: "100" },
-  { name: "이름", col_w: "320" },
+  { name: "번호", col_w: "70" },
+  { name: "쇼핑몰", col_w: "140" },
+  { name: "이름", col_w: "260" },
   { name: "연락처", col_w: "100" },
   { name: "차종", col_w: "100" },
-  { name: "제휴사", col_w: "100" },
-  { name: "담당자", col_w: "100" },
-  { name: "구분", col_w: "100" },
+  { name: "제휴사", col_w: "200" },
+  { name: "담당자", col_w: "200" },
+  { name: "구분", col_w: "120" },
   { name: "등록일", col_w: "300" },
-  { name: "진행도", col_w: "100" },
+  { name: "진행도", col_w: "200" },
 ];
 
-let tableTotalWidthCount = 28;
+let tableHeadListCount = 0;
 
-const tableHeadList = tableHeadListBase.map((tableHead, i) => {
-  tableTotalWidthCount += Number(tableHead.col_w);
-  tableHead.col_w = `w-[${tableHead.col_w}px]`;
-  return tableHead;
-});
+function colW(index: number): string {
+  return tableHeadListBase[index].col_w;
+}
 
 export default function Consult() {
-  const { data } = useSWR<CustomerInfoListResponse>("/api/consult");
+  const router = useRouter();
+  const [page, setPage] = useState(1);
+
+  useEffect(() => {
+    // router.events.on("routeChangeStart", () => {
+    //   console.log("테스트");
+    // });
+    if (!router.isReady) return;
+    if (router.query.page === undefined) {
+      // console.log(router.query.page);
+      router.push({ query: { page: page } });
+    }
+  }, [router.query.page]);
+
+  // useEffect(() => {
+  //   if (!router.isReady) return;
+  //   if (Number(router.query.page) != page) {
+  //     setPage(Number(router.query.page));
+  //   }
+  // }, [router]);
+
+  // router.events.on;
+
+  // console.log(page);
+
+  // if (router.isReady) return;
+  const { data } = useSWR<CustomerInfoListResponse>(
+    `/api/consult?page=${page}`
+  );
+
+  const tableContentsList = data?.customerInfoList;
+  const pageMovePrev = () => {
+    setPage(page - 1);
+    if (page <= 1) setPage(1);
+    router.push({ query: { page: page } });
+  };
+  const pageMoveNext = () => {
+    setPage(page + 1);
+    router.push({ query: { page: page } });
+  };
 
   return (
     <Layout mainMenu="상담 관리" subMenu="신청관리">
@@ -79,7 +103,11 @@ export default function Consult() {
               />
             </svg>
           </button>
-          <button className="order-2 py-1">
+          <button
+            className="order-2 py-1"
+            onClick={pageMovePrev}
+            disabled={Number(router.query.page) <= 1}
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -127,7 +155,7 @@ export default function Consult() {
               />
             </svg>
           </div>
-          <button className="order-6 py-1">
+          <button className="order-6 py-1" onClick={pageMoveNext}>
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -170,60 +198,31 @@ export default function Consult() {
         </div>
 
         <Table
-          tableHeadList={tableHeadList}
+          tableHeadList={tableHeadListBase}
           tableContentsList={
             data?.customerInfoList ? data?.customerInfoList : []
           }
           className="mt-4"
-        ></Table>
-        {/* <div
-          className={cls(
-            "relative overflow-auto h-[400px] bg-white max-w-fit"
-            // tableTotalMaxWidth
-          )}
-          // style={{ minWidth: `${tableTotalWidthCount}px` }}
-          // style={{ width: "1000px", height: "280px" }}
         >
-          <ul
-            className={
-              "flex bg-slate-300 top-0 border-b-[1px] border-b-teal-600  border-stone-300 border-t-2 border-t-teal-600 sticky min-w-fit"
-            }
-          >
-            <li className="w-7 flex justify-center items-center border-r-neutral-300 border-x-[1px] max">
-              <input type="checkbox" />
-            </li>
-            {tableHeadList.map((tableHead, i) => (
-              <li
-                key={i}
-                className={cls(
-                  "border-r-neutral-300 border-r-[1px] h-8 flex justify-center items-center",
-                  `${tableHead.col_w}`
-                )}
-              >
-                <p className="text-sm">{tableHead.name}</p>
-              </li>
-            ))}
-          </ul>
-
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((_, i) => (
-            <ul key={i} className="flex first-of-type:border-t-0 group">
-              <li className="w-7 flex justify-center items-center border-neutral-300 border-[1px] border-t-0 flex-shrink-0 group-even:bg-slate-100">
-                <input type="checkbox" />
-              </li>
-              {test.map((_, i) => (
-                <li
-                  key={i}
-                  className={cls(
-                    "border-[1px] border-l-0 py-3 flex justify-center items-center flex-shrink-0 group-even:bg-slate-100",
-                    tableHeadList[i].col_w
-                  )}
-                >
-                  <p>테스트{i}</p>
-                </li>
-              ))}
-            </ul>
-          ))}
-        </div> */}
+          {tableContentsList?.map((data, i) => {
+            let count = 0;
+            let dataNum = tableContentsList.length - i;
+            return (
+              <TRow key={i}>
+                <TCol colW={colW(count++)} data={dataNum} />
+                <TCol colW={colW(count++)} data={data.visitSite} />
+                <TCol colW={colW(count++)} data={data.name} />
+                <TCol colW={colW(count++)} data={data.phone} />
+                <TCol colW={colW(count++)} data={data.name} />
+                <TCol colW={colW(count++)} data={data.name} />
+                <TCol colW={colW(count++)} data={data.wantCar} />
+                <TCol colW={colW(count++)} data={data.reception} />
+                <TCol colW={colW(count++)} data={data.createdAt} />
+                <TCol colW={colW(count++)} data={data.progress} />
+              </TRow>
+            );
+          })}
+        </Table>
       </div>
     </Layout>
   );

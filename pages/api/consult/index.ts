@@ -6,11 +6,15 @@ async function handler(
   req: NextApiRequest,
   res: NextApiResponse<ResponseType>
 ) {
-  // const {
-  //   query: { id },
-  // } = req;
-
-  const customerInfoList = await client.customerInfo.findMany({});
+  const {
+    query: { page },
+  } = req;
+  const backedPage = Number(page) - 1;
+  console.log(page);
+  const customerInfoList = await client.customerInfo.findMany({
+    take: 10,
+    skip: backedPage * 10,
+  });
 
   return res.json({
     ok: true,
