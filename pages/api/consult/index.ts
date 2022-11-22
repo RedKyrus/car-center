@@ -16,10 +16,15 @@ async function handler(
     skip: backedPage * 10,
   });
 
+  const customerInfoListAmount = await client.customerInfo.count();
+
   return res.json({
     ok: true,
     customerInfoList,
+    customerInfoListAmount,
   });
+
+  co;
 }
 
 export default withHandler({ methods: ["GET"], handler });
